@@ -6,6 +6,8 @@
 
 项目偏向让玩家自己管理存档文件。管理器主要负责预览快照历史和保存快照，并提供打开目录的入口。查看或修改存档内容时，请用 Windows 资源管理器找到文件，再用合适的编辑工具操作。例如，如果存档以可编辑的键值对保存数据，你可以自行调整金币、道具数量等数值。
 
+![存档管理器的 Nord 深色界面，展示追踪路径、快照根目录和快照历史](docs/images/save-manager-nord.png)
+
 ## 下载与运行
 
 在 [GitHub Releases](https://github.com/GodBlf/save-manager/releases/latest) 下载 Windows x64 ZIP，解压后运行 `save-manager.exe`。
