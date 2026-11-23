@@ -4,6 +4,8 @@
 
 A local Windows save manager built with Rust and egui. Choose which files and folders to track for each game, create snapshots manually, and find the version you need in the snapshot history.
 
+The app is designed for players who manage their save files by hand. Its main jobs are saving snapshots, showing snapshot history, and opening folders. To inspect or edit a save, find the file in Windows File Explorer and open it with a suitable editor. For example, if the save uses editable key-value pairs, you can change values such as gold or item counts yourself.
+
 ## Download and run
 
 Download the Windows x64 ZIP from [GitHub Releases](https://github.com/GodBlf/save-manager/releases/latest), extract it, and run `save-manager.exe`. The app interface is in Simplified Chinese.
@@ -11,8 +13,8 @@ Download the Windows x64 ZIP from [GitHub Releases](https://github.com/GodBlf/sa
 ## Quick start
 
 1. Click Add Game (「添加游戏」), enter a name, and choose a dedicated snapshot root folder for the game.
-2. Add the files and folders you want to track, such as `D:\A\saves\` and `D:\A\A.ini`.
-3. Click Create Snapshot (「创建快照」). If you name the first snapshot `Important`, the app saves both tracked items as `0-Important\saves\` and `0-Important\A.ini` under the snapshot root. Leave the name blank to use `0\`.
+2. For a Zelda example, suppose your tracked folder and file are at `D:\Zelda\saves\` and `D:\Zelda\Zelda.ini`. Add both paths, using the actual locations for your setup.
+3. Click Create Snapshot (「创建快照」). If you name the first snapshot `Zelda Important`, the app saves both tracked items as `0-Zelda Important\saves\` and `0-Zelda Important\Zelda.ini` under the snapshot root. Leave the name blank to use `0\`.
 4. Use the snapshot history to open a folder, rename a snapshot, restore it, or delete it. Renaming keeps the original number. After you confirm deletion, the app attempts to send the snapshot to the Windows Recycle Bin.
 
 Close the game before restoring and review the original save paths shown in the confirmation dialog. Restore replaces the listed files or directories in full. Files absent from the snapshot are removed from any directory being replaced.
