@@ -53,6 +53,13 @@ pub struct Game {
     next: u64,
 }
 
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[serde(rename_all = "lowercase")]
+pub enum Appearance {
+    Light,
+    Dark,
+}
+
 pub struct Manager {
     state: PathBuf,
     games: Vec<Game>,
@@ -99,6 +106,17 @@ impl Manager {
 
     pub fn notices(&self) -> &[String] {
         &self.notices
+    }
+
+    pub fn appearance(&self) -> Result<Option<Appearance>> {
+        let path = self.state.join("appearance.json");
+        disk::metadata(&path)?
+            .map(|_| disk::read(&path))
+            .transpose()
+    }
+
+    pub fn save_appearance(&self, appearance: Appearance) -> Result<()> {
+        disk::write(&self.state.join("appearance.json"), &appearance)
     }
 
     pub fn game(&self, id: Uuid) -> Result<&Game> {

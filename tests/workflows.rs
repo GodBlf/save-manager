@@ -1,4 +1,4 @@
-use save_manager::{GameInput, Manager};
+use save_manager::{Appearance, GameInput, Manager};
 use serde_json::json;
 use std::fs;
 use std::path::{Path, PathBuf};
@@ -21,6 +21,23 @@ fn game_settings_survive_reopening_and_roots_are_exclusive() {
     let manager = Manager::open(&state).unwrap();
     assert_eq!(manager.games()[0].id, game);
     assert_eq!(manager.games()[0].input, input);
+}
+
+#[test]
+fn appearance_follows_system_until_an_explicit_choice_is_saved() {
+    let area = tempfile::tempdir().unwrap();
+    let manager = Manager::open(area.path()).unwrap();
+    assert_eq!(manager.appearance().unwrap(), None);
+    manager.save_appearance(Appearance::Dark).unwrap();
+    drop(manager);
+
+    let manager = Manager::open(area.path()).unwrap();
+    assert_eq!(manager.appearance().unwrap(), Some(Appearance::Dark));
+    manager.save_appearance(Appearance::Light).unwrap();
+    drop(manager);
+
+    let manager = Manager::open(area.path()).unwrap();
+    assert_eq!(manager.appearance().unwrap(), Some(Appearance::Light));
 }
 
 struct GameArea {
